@@ -1,2 +1,9 @@
 # This file contains additional build requirements that did not get
 # picked up automatically. One name per line, no whitespace.
+python-editor
+Mako-python
+SQLAlchemy-python
+MarkupSafe-python
+python-mock
+pytest-cov-python
+funcsigs-python\msix
