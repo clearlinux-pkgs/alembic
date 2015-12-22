@@ -6,4 +6,5 @@ SQLAlchemy-python
 MarkupSafe-python
 python-mock
 pytest-cov-python
-funcsigs-python\msix
+funcsigs-python
+six
