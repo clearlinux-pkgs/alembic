@@ -4,7 +4,7 @@
 #
 Name     : alembic
 Version  : 0.8.4
-Release  : 26
+Release  : 27
 URL      : https://pypi.python.org/packages/source/a/alembic/alembic-0.8.4.tar.gz
 Source0  : https://pypi.python.org/packages/source/a/alembic/alembic-0.8.4.tar.gz
 Summary  : A database migration tool for SQLAlchemy.
