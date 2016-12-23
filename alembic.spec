@@ -4,7 +4,7 @@
 #
 Name     : alembic
 Version  : 0.8.8
-Release  : 35
+Release  : 36
 URL      : http://pypi.debian.net/alembic/alembic-0.8.8.tar.gz
 Source0  : http://pypi.debian.net/alembic/alembic-0.8.8.tar.gz
 Summary  : A database migration tool for SQLAlchemy.
