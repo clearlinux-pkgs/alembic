@@ -2,9 +2,9 @@
 # picked up automatically. One name per line, no whitespace.
 python-editor
 Mako-python
-SQLAlchemy-python
-MarkupSafe-python
+SQLAlchemy
+MarkupSafe
 python-mock
-pytest-cov-python
-funcsigs-python
+pytest-cov
+funcsigs
 six

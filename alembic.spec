@@ -6,7 +6,7 @@
 #
 Name     : alembic
 Version  : 0.8.9
-Release  : 39
+Release  : 40
 URL      : http://pypi.debian.net/alembic/alembic-0.8.9.tar.gz
 Source0  : http://pypi.debian.net/alembic/alembic-0.8.9.tar.gz
 Source99 : http://pypi.debian.net/alembic/alembic-0.8.9.tar.gz.asc
@@ -15,16 +15,19 @@ Group    : Development/Tools
 License  : MIT
 Requires: alembic-bin
 Requires: alembic-python
+Requires: Mako
+Requires: SQLAlchemy
+Requires: python-editor
 BuildRequires : Mako-python
-BuildRequires : MarkupSafe-python
-BuildRequires : SQLAlchemy-python
-BuildRequires : funcsigs-python
+BuildRequires : MarkupSafe
+BuildRequires : SQLAlchemy
+BuildRequires : funcsigs
 BuildRequires : pbr
 BuildRequires : pip
 BuildRequires : pluggy
 BuildRequires : py-python
 BuildRequires : pytest
-BuildRequires : pytest-cov-python
+BuildRequires : pytest-cov
 BuildRequires : python-dev
 BuildRequires : python-editor
 BuildRequires : python-mock
@@ -48,8 +51,6 @@ bin components for the alembic package.
 %package python
 Summary: python components for the alembic package.
 Group: Default
-Requires: Mako-python
-Requires: SQLAlchemy-python
 
 %description python
 python components for the alembic package.
@@ -60,7 +61,7 @@ python components for the alembic package.
 
 %build
 export LANG=C
-export SOURCE_DATE_EPOCH=1487182868
+export SOURCE_DATE_EPOCH=1487882483
 python2 setup.py build -b py2
 python3 setup.py build -b py3
 
@@ -70,7 +71,7 @@ export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 PYTHONPATH=%{buildroot}/usr/lib/python2.7/site-packages python2 setup.py test || :
 %install
-export SOURCE_DATE_EPOCH=1487182868
+export SOURCE_DATE_EPOCH=1487882483
 rm -rf %{buildroot}
 python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
 python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
