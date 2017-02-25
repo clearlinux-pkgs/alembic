@@ -6,7 +6,7 @@
 #
 Name     : alembic
 Version  : 0.8.9
-Release  : 41
+Release  : 42
 URL      : http://pypi.debian.net/alembic/alembic-0.8.9.tar.gz
 Source0  : http://pypi.debian.net/alembic/alembic-0.8.9.tar.gz
 Source99 : http://pypi.debian.net/alembic/alembic-0.8.9.tar.gz.asc
