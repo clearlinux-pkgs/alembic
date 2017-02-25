@@ -6,7 +6,7 @@
 #
 Name     : alembic
 Version  : 0.8.9
-Release  : 40
+Release  : 41
 URL      : http://pypi.debian.net/alembic/alembic-0.8.9.tar.gz
 Source0  : http://pypi.debian.net/alembic/alembic-0.8.9.tar.gz
 Source99 : http://pypi.debian.net/alembic/alembic-0.8.9.tar.gz.asc
@@ -61,7 +61,7 @@ python components for the alembic package.
 
 %build
 export LANG=C
-export SOURCE_DATE_EPOCH=1487882483
+export SOURCE_DATE_EPOCH=1488046238
 python2 setup.py build -b py2
 python3 setup.py build -b py3
 
@@ -71,7 +71,7 @@ export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 PYTHONPATH=%{buildroot}/usr/lib/python2.7/site-packages python2 setup.py test || :
 %install
-export SOURCE_DATE_EPOCH=1487882483
+export SOURCE_DATE_EPOCH=1488046238
 rm -rf %{buildroot}
 python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
 python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
