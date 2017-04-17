@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x330239C1C4DAFEE1 (classic@zzzcomputing.com)
 #
 Name     : alembic
-Version  : 0.8.9
-Release  : 42
-URL      : http://pypi.debian.net/alembic/alembic-0.8.9.tar.gz
-Source0  : http://pypi.debian.net/alembic/alembic-0.8.9.tar.gz
-Source99 : http://pypi.debian.net/alembic/alembic-0.8.9.tar.gz.asc
+Version  : 0.9.1
+Release  : 43
+URL      : https://pypi.debian.net/alembic/alembic-0.9.1.tar.gz
+Source0  : https://pypi.debian.net/alembic/alembic-0.9.1.tar.gz
+Source99 : https://pypi.debian.net/alembic/alembic-0.9.1.tar.gz.asc
 Summary  : A database migration tool for SQLAlchemy.
 Group    : Development/Tools
 License  : MIT
@@ -57,11 +57,11 @@ python components for the alembic package.
 
 
 %prep
-%setup -q -n alembic-0.8.9
+%setup -q -n alembic-0.9.1
 
 %build
 export LANG=C
-export SOURCE_DATE_EPOCH=1488046238
+export SOURCE_DATE_EPOCH=1492439194
 python2 setup.py build -b py2
 python3 setup.py build -b py3
 
@@ -69,12 +69,15 @@ python3 setup.py build -b py3
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-PYTHONPATH=%{buildroot}/usr/lib/python2.7/site-packages python2 setup.py test || :
+PYTHONPATH=%{buildroot}/usr/lib/python3.6/site-packages python3 setup.py test || :
 %install
-export SOURCE_DATE_EPOCH=1488046238
+export SOURCE_DATE_EPOCH=1492439194
 rm -rf %{buildroot}
 python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
 python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
+echo ----[ mark ]----
+cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
+echo ----[ mark ]----
 
 %files
 %defattr(-,root,root,-)
@@ -85,4 +88,5 @@ python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
 
 %files python
 %defattr(-,root,root,-)
-/usr/lib/python*/*
+/usr/lib/python2*/*
+/usr/lib/python3*/*
