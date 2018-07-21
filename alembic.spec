@@ -6,7 +6,7 @@
 #
 Name     : alembic
 Version  : 0.9.1
-Release  : 45
+Release  : 46
 URL      : https://pypi.debian.net/alembic/alembic-0.9.1.tar.gz
 Source0  : https://pypi.debian.net/alembic/alembic-0.9.1.tar.gz
 Source99 : https://pypi.debian.net/alembic/alembic-0.9.1.tar.gz.asc
@@ -14,6 +14,8 @@ Summary  : A database migration tool for SQLAlchemy.
 Group    : Development/Tools
 License  : MIT
 Requires: alembic-bin
+Requires: alembic-python3
+Requires: alembic-license
 Requires: alembic-python
 Requires: Mako
 Requires: SQLAlchemy
@@ -21,6 +23,7 @@ Requires: python-editor
 BuildRequires : Mako-python
 BuildRequires : MarkupSafe
 BuildRequires : SQLAlchemy
+BuildRequires : buildreq-distutils3
 BuildRequires : funcsigs
 BuildRequires : pbr
 BuildRequires : pip
@@ -28,7 +31,6 @@ BuildRequires : pluggy
 BuildRequires : py-python
 BuildRequires : pytest
 BuildRequires : pytest-cov
-BuildRequires : python-dev
 BuildRequires : python-editor
 BuildRequires : python-mock
 BuildRequires : python3-dev
@@ -43,38 +45,59 @@ Rudimentary multi-database configuration.
 %package bin
 Summary: bin components for the alembic package.
 Group: Binaries
+Requires: alembic-license
 
 %description bin
 bin components for the alembic package.
 
 
+%package license
+Summary: license components for the alembic package.
+Group: Default
+
+%description license
+license components for the alembic package.
+
+
 %package python
 Summary: python components for the alembic package.
 Group: Default
+Requires: alembic-python3
 
 %description python
 python components for the alembic package.
+
+
+%package python3
+Summary: python3 components for the alembic package.
+Group: Default
+Requires: python3-core
+
+%description python3
+python3 components for the alembic package.
 
 
 %prep
 %setup -q -n alembic-0.9.1
 
 %build
+export http_proxy=http://127.0.0.1:9/
+export https_proxy=http://127.0.0.1:9/
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1492439194
-python2 setup.py build -b py2
+export SOURCE_DATE_EPOCH=1532208190
 python3 setup.py build -b py3
 
 %check
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-PYTHONPATH=%{buildroot}/usr/lib/python3.6/site-packages python3 setup.py test || :
+PYTHONPATH=%{buildroot}/usr/lib/python3.7/site-packages python3 setup.py test || :
 %install
-export SOURCE_DATE_EPOCH=1492439194
 rm -rf %{buildroot}
-python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
-python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
+mkdir -p %{buildroot}/usr/share/doc/alembic
+cp LICENSE %{buildroot}/usr/share/doc/alembic/LICENSE
+python3 -tt setup.py build -b py3 install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
@@ -86,7 +109,13 @@ echo ----[ mark ]----
 %defattr(-,root,root,-)
 /usr/bin/alembic
 
+%files license
+%defattr(-,root,root,-)
+/usr/share/doc/alembic/LICENSE
+
 %files python
 %defattr(-,root,root,-)
-/usr/lib/python2*/*
+
+%files python3
+%defattr(-,root,root,-)
 /usr/lib/python3*/*
