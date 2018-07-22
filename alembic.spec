@@ -5,20 +5,20 @@
 # Source0 file verified with key 0x330239C1C4DAFEE1 (classic@zzzcomputing.com)
 #
 Name     : alembic
-Version  : 0.9.1
-Release  : 47
-URL      : https://pypi.debian.net/alembic/alembic-0.9.1.tar.gz
-Source0  : https://pypi.debian.net/alembic/alembic-0.9.1.tar.gz
-Source99 : https://pypi.debian.net/alembic/alembic-0.9.1.tar.gz.asc
+Version  : 1.0.0
+Release  : 48
+URL      : https://files.pythonhosted.org/packages/92/41/c01e9a2eaef90348cf7dea5054605c991633b5ca470574efe768b60ad5bc/alembic-1.0.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/92/41/c01e9a2eaef90348cf7dea5054605c991633b5ca470574efe768b60ad5bc/alembic-1.0.0.tar.gz
+Source99 : https://files.pythonhosted.org/packages/92/41/c01e9a2eaef90348cf7dea5054605c991633b5ca470574efe768b60ad5bc/alembic-1.0.0.tar.gz.asc
 Summary  : A database migration tool for SQLAlchemy.
 Group    : Development/Tools
 License  : MIT
 Requires: alembic-bin
 Requires: alembic-python3
-Requires: alembic-license
 Requires: alembic-python
 Requires: Mako
 Requires: SQLAlchemy
+Requires: python-dateutil
 Requires: python-editor
 BuildRequires : Mako-python
 BuildRequires : MarkupSafe
@@ -45,18 +45,9 @@ Rudimentary multi-database configuration.
 %package bin
 Summary: bin components for the alembic package.
 Group: Binaries
-Requires: alembic-license
 
 %description bin
 bin components for the alembic package.
-
-
-%package license
-Summary: license components for the alembic package.
-Group: Default
-
-%description license
-license components for the alembic package.
 
 
 %package python
@@ -78,14 +69,14 @@ python3 components for the alembic package.
 
 
 %prep
-%setup -q -n alembic-0.9.1
+%setup -q -n alembic-1.0.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1532216308
+export SOURCE_DATE_EPOCH=1532240410
 python3 setup.py build -b py3
 
 %check
@@ -95,8 +86,6 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 PYTHONPATH=%{buildroot}/usr/lib/python3.7/site-packages python3 setup.py test || :
 %install
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/alembic
-cp LICENSE %{buildroot}/usr/share/doc/alembic/LICENSE
 python3 -tt setup.py build -b py3 install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -108,10 +97,6 @@ echo ----[ mark ]----
 %files bin
 %defattr(-,root,root,-)
 /usr/bin/alembic
-
-%files license
-%defattr(-,root,root,-)
-/usr/share/doc/alembic/LICENSE
 
 %files python
 %defattr(-,root,root,-)
