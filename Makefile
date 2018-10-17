@@ -1,5 +1,5 @@
 PKG_NAME := alembic
-URL = https://files.pythonhosted.org/packages/92/41/c01e9a2eaef90348cf7dea5054605c991633b5ca470574efe768b60ad5bc/alembic-1.0.0.tar.gz
+URL = https://files.pythonhosted.org/packages/1a/37/8df0e37d730f096f5a41514823eaec3c5e169510a5c5ddc3dcbab5446ee8/alembic-1.0.1.tar.gz
 ARCHIVES = 
 
 include ../common/Makefile.common

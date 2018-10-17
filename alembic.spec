@@ -5,17 +5,18 @@
 # Source0 file verified with key 0x330239C1C4DAFEE1 (classic@zzzcomputing.com)
 #
 Name     : alembic
-Version  : 1.0.0
-Release  : 48
-URL      : https://files.pythonhosted.org/packages/92/41/c01e9a2eaef90348cf7dea5054605c991633b5ca470574efe768b60ad5bc/alembic-1.0.0.tar.gz
-Source0  : https://files.pythonhosted.org/packages/92/41/c01e9a2eaef90348cf7dea5054605c991633b5ca470574efe768b60ad5bc/alembic-1.0.0.tar.gz
-Source99 : https://files.pythonhosted.org/packages/92/41/c01e9a2eaef90348cf7dea5054605c991633b5ca470574efe768b60ad5bc/alembic-1.0.0.tar.gz.asc
+Version  : 1.0.1
+Release  : 49
+URL      : https://files.pythonhosted.org/packages/1a/37/8df0e37d730f096f5a41514823eaec3c5e169510a5c5ddc3dcbab5446ee8/alembic-1.0.1.tar.gz
+Source0  : https://files.pythonhosted.org/packages/1a/37/8df0e37d730f096f5a41514823eaec3c5e169510a5c5ddc3dcbab5446ee8/alembic-1.0.1.tar.gz
+Source99 : https://files.pythonhosted.org/packages/1a/37/8df0e37d730f096f5a41514823eaec3c5e169510a5c5ddc3dcbab5446ee8/alembic-1.0.1.tar.gz.asc
 Summary  : A database migration tool for SQLAlchemy.
 Group    : Development/Tools
 License  : MIT
-Requires: alembic-bin
-Requires: alembic-python3
-Requires: alembic-python
+Requires: alembic-bin = %{version}-%{release}
+Requires: alembic-license = %{version}-%{release}
+Requires: alembic-python = %{version}-%{release}
+Requires: alembic-python3 = %{version}-%{release}
 Requires: Mako
 Requires: SQLAlchemy
 Requires: python-dateutil
@@ -25,35 +26,40 @@ BuildRequires : MarkupSafe
 BuildRequires : SQLAlchemy
 BuildRequires : buildreq-distutils3
 BuildRequires : funcsigs
-BuildRequires : pbr
-BuildRequires : pip
 BuildRequires : pluggy
 BuildRequires : py-python
 BuildRequires : pytest
 BuildRequires : pytest-cov
 BuildRequires : python-editor
 BuildRequires : python-mock
-BuildRequires : python3-dev
-BuildRequires : setuptools
 BuildRequires : six
 BuildRequires : tox
 BuildRequires : virtualenv
 
 %description
-Rudimentary multi-database configuration.
+Configuration that reads from a Pylons project environment.
 
 %package bin
 Summary: bin components for the alembic package.
 Group: Binaries
+Requires: alembic-license = %{version}-%{release}
 
 %description bin
 bin components for the alembic package.
 
 
+%package license
+Summary: license components for the alembic package.
+Group: Default
+
+%description license
+license components for the alembic package.
+
+
 %package python
 Summary: python components for the alembic package.
 Group: Default
-Requires: alembic-python3
+Requires: alembic-python3 = %{version}-%{release}
 
 %description python
 python components for the alembic package.
@@ -69,15 +75,15 @@ python3 components for the alembic package.
 
 
 %prep
-%setup -q -n alembic-1.0.0
+%setup -q -n alembic-1.0.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1532240410
-python3 setup.py build -b py3
+export SOURCE_DATE_EPOCH=1539794358
+python3 setup.py build
 
 %check
 export http_proxy=http://127.0.0.1:9/
@@ -86,7 +92,9 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 PYTHONPATH=%{buildroot}/usr/lib/python3.7/site-packages python3 setup.py test || :
 %install
 rm -rf %{buildroot}
-python3 -tt setup.py build -b py3 install --root=%{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/alembic
+cp LICENSE %{buildroot}/usr/share/package-licenses/alembic/LICENSE
+python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
@@ -97,6 +105,10 @@ echo ----[ mark ]----
 %files bin
 %defattr(-,root,root,-)
 /usr/bin/alembic
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/alembic/LICENSE
 
 %files python
 %defattr(-,root,root,-)
