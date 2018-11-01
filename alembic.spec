@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x330239C1C4DAFEE1 (classic@zzzcomputing.com)
 #
 Name     : alembic
-Version  : 1.0.1
-Release  : 49
-URL      : https://files.pythonhosted.org/packages/1a/37/8df0e37d730f096f5a41514823eaec3c5e169510a5c5ddc3dcbab5446ee8/alembic-1.0.1.tar.gz
-Source0  : https://files.pythonhosted.org/packages/1a/37/8df0e37d730f096f5a41514823eaec3c5e169510a5c5ddc3dcbab5446ee8/alembic-1.0.1.tar.gz
-Source99 : https://files.pythonhosted.org/packages/1a/37/8df0e37d730f096f5a41514823eaec3c5e169510a5c5ddc3dcbab5446ee8/alembic-1.0.1.tar.gz.asc
+Version  : 1.0.2
+Release  : 50
+URL      : https://files.pythonhosted.org/packages/c0/f3/e60af9a36ae3b8cafabc7e0834d8df6a2965b3feecf27b9b11352dc05dd4/alembic-1.0.2.tar.gz
+Source0  : https://files.pythonhosted.org/packages/c0/f3/e60af9a36ae3b8cafabc7e0834d8df6a2965b3feecf27b9b11352dc05dd4/alembic-1.0.2.tar.gz
+Source99 : https://files.pythonhosted.org/packages/c0/f3/e60af9a36ae3b8cafabc7e0834d8df6a2965b3feecf27b9b11352dc05dd4/alembic-1.0.2.tar.gz.asc
 Summary  : A database migration tool for SQLAlchemy.
 Group    : Development/Tools
 License  : MIT
@@ -75,14 +75,14 @@ python3 components for the alembic package.
 
 
 %prep
-%setup -q -n alembic-1.0.1
+%setup -q -n alembic-1.0.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1539794358
+export SOURCE_DATE_EPOCH=1541037905
 python3 setup.py build
 
 %check
