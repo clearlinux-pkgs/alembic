@@ -5,12 +5,12 @@
 # Source0 file verified with key 0x330239C1C4DAFEE1 (classic@zzzcomputing.com)
 #
 Name     : alembic
-Version  : 1.0.5
-Release  : 57
-URL      : https://files.pythonhosted.org/packages/1c/65/b8e4f5b2f345bb13b5e0a3fddd892b0b3f0e8ad4880e954fdc6a50d00d84/alembic-1.0.5.tar.gz
-Source0  : https://files.pythonhosted.org/packages/1c/65/b8e4f5b2f345bb13b5e0a3fddd892b0b3f0e8ad4880e954fdc6a50d00d84/alembic-1.0.5.tar.gz
-Source99 : https://files.pythonhosted.org/packages/1c/65/b8e4f5b2f345bb13b5e0a3fddd892b0b3f0e8ad4880e954fdc6a50d00d84/alembic-1.0.5.tar.gz.asc
-Summary  : A database migration tool for SQLAlchemy.
+Version  : 1.0.6
+Release  : 58
+URL      : https://files.pythonhosted.org/packages/50/7a/17bc17b3f5b01ebd3af38d71a15baa33beb241ab280b6ad0977ae24ec208/alembic-1.0.6.tar.gz
+Source0  : https://files.pythonhosted.org/packages/50/7a/17bc17b3f5b01ebd3af38d71a15baa33beb241ab280b6ad0977ae24ec208/alembic-1.0.6.tar.gz
+Source99 : https://files.pythonhosted.org/packages/50/7a/17bc17b3f5b01ebd3af38d71a15baa33beb241ab280b6ad0977ae24ec208/alembic-1.0.6.tar.gz.asc
+Summary  : A open framework for storing and sharing scene data
 Group    : Development/Tools
 License  : MIT
 Requires: alembic-bin = %{version}-%{release}
@@ -75,14 +75,15 @@ python3 components for the alembic package.
 
 
 %prep
-%setup -q -n alembic-1.0.5
+%setup -q -n alembic-1.0.6
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1543390226
+export SOURCE_DATE_EPOCH=1547435568
+export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
 %check
