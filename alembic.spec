@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x330239C1C4DAFEE1 (classic@zzzcomputing.com)
 #
 Name     : alembic
-Version  : 1.0.6
-Release  : 58
-URL      : https://files.pythonhosted.org/packages/50/7a/17bc17b3f5b01ebd3af38d71a15baa33beb241ab280b6ad0977ae24ec208/alembic-1.0.6.tar.gz
-Source0  : https://files.pythonhosted.org/packages/50/7a/17bc17b3f5b01ebd3af38d71a15baa33beb241ab280b6ad0977ae24ec208/alembic-1.0.6.tar.gz
-Source99 : https://files.pythonhosted.org/packages/50/7a/17bc17b3f5b01ebd3af38d71a15baa33beb241ab280b6ad0977ae24ec208/alembic-1.0.6.tar.gz.asc
+Version  : 1.0.7
+Release  : 59
+URL      : https://files.pythonhosted.org/packages/a4/06/f1ae8393463c26f3dafa21eebac611088da02a26e1f1e23bd75fee2dbffe/alembic-1.0.7.tar.gz
+Source0  : https://files.pythonhosted.org/packages/a4/06/f1ae8393463c26f3dafa21eebac611088da02a26e1f1e23bd75fee2dbffe/alembic-1.0.7.tar.gz
+Source99 : https://files.pythonhosted.org/packages/a4/06/f1ae8393463c26f3dafa21eebac611088da02a26e1f1e23bd75fee2dbffe/alembic-1.0.7.tar.gz.asc
 Summary  : A open framework for storing and sharing scene data
 Group    : Development/Tools
 License  : MIT
@@ -75,14 +75,14 @@ python3 components for the alembic package.
 
 
 %prep
-%setup -q -n alembic-1.0.6
+%setup -q -n alembic-1.0.7
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1547435568
+export SOURCE_DATE_EPOCH=1548511488
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
