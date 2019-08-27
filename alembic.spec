@@ -5,15 +5,16 @@
 # Source0 file verified with key 0x330239C1C4DAFEE1 (classic@zzzcomputing.com)
 #
 Name     : alembic
-Version  : 1.0.11
-Release  : 65
-URL      : https://files.pythonhosted.org/packages/7b/8b/0c98c378d93165d9809193f274c3c6e2151120d955b752419c7d43e4d857/alembic-1.0.11.tar.gz
-Source0  : https://files.pythonhosted.org/packages/7b/8b/0c98c378d93165d9809193f274c3c6e2151120d955b752419c7d43e4d857/alembic-1.0.11.tar.gz
-Source99 : https://files.pythonhosted.org/packages/7b/8b/0c98c378d93165d9809193f274c3c6e2151120d955b752419c7d43e4d857/alembic-1.0.11.tar.gz.asc
+Version  : 1.1.0
+Release  : 66
+URL      : https://files.pythonhosted.org/packages/9a/0f/a5e8997d58882da8ecd288360dddf133a83145de6480216774923b393422/alembic-1.1.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/9a/0f/a5e8997d58882da8ecd288360dddf133a83145de6480216774923b393422/alembic-1.1.0.tar.gz
+Source1 : https://files.pythonhosted.org/packages/9a/0f/a5e8997d58882da8ecd288360dddf133a83145de6480216774923b393422/alembic-1.1.0.tar.gz.asc
 Summary  : A open framework for storing and sharing scene data
 Group    : Development/Tools
 License  : MIT
 Requires: alembic-bin = %{version}-%{release}
+Requires: alembic-license = %{version}-%{release}
 Requires: alembic-python = %{version}-%{release}
 Requires: alembic-python3 = %{version}-%{release}
 Requires: Mako
@@ -43,9 +44,18 @@ Configuration that reads from a Pylons project environment.
 %package bin
 Summary: bin components for the alembic package.
 Group: Binaries
+Requires: alembic-license = %{version}-%{release}
 
 %description bin
 bin components for the alembic package.
+
+
+%package license
+Summary: license components for the alembic package.
+Group: Default
+
+%description license
+license components for the alembic package.
 
 
 %package python
@@ -67,14 +77,15 @@ python3 components for the alembic package.
 
 
 %prep
-%setup -q -n alembic-1.0.11
+%setup -q -n alembic-1.1.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1561511294
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1566905402
+# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -86,14 +97,11 @@ export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
-%check
-export http_proxy=http://127.0.0.1:9/
-export https_proxy=http://127.0.0.1:9/
-export no_proxy=localhost,127.0.0.1,0.0.0.0
-PYTHONPATH=%{buildroot}/usr/lib/python3.7/site-packages python3 setup.py test || :
 %install
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/alembic
+cp LICENSE %{buildroot}/usr/share/package-licenses/alembic/LICENSE
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -105,6 +113,10 @@ echo ----[ mark ]----
 %files bin
 %defattr(-,root,root,-)
 /usr/bin/alembic
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/alembic/LICENSE
 
 %files python
 %defattr(-,root,root,-)
