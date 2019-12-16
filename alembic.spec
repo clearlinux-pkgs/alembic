@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x330239C1C4DAFEE1 (classic@zzzcomputing.com)
 #
 Name     : alembic
-Version  : 1.3.1
-Release  : 71
-URL      : https://files.pythonhosted.org/packages/84/64/493c45119dce700a4b9eeecc436ef9e8835ab67bae6414f040cdc7b58f4b/alembic-1.3.1.tar.gz
-Source0  : https://files.pythonhosted.org/packages/84/64/493c45119dce700a4b9eeecc436ef9e8835ab67bae6414f040cdc7b58f4b/alembic-1.3.1.tar.gz
-Source1 : https://files.pythonhosted.org/packages/84/64/493c45119dce700a4b9eeecc436ef9e8835ab67bae6414f040cdc7b58f4b/alembic-1.3.1.tar.gz.asc
+Version  : 1.3.2
+Release  : 72
+URL      : https://files.pythonhosted.org/packages/dc/6d/3c1411dfdcf089ec89ce5e2222deb2292f39b6b1a5911222e15af9fe5a92/alembic-1.3.2.tar.gz
+Source0  : https://files.pythonhosted.org/packages/dc/6d/3c1411dfdcf089ec89ce5e2222deb2292f39b6b1a5911222e15af9fe5a92/alembic-1.3.2.tar.gz
+Source1  : https://files.pythonhosted.org/packages/dc/6d/3c1411dfdcf089ec89ce5e2222deb2292f39b6b1a5911222e15af9fe5a92/alembic-1.3.2.tar.gz.asc
 Summary  : A open framework for storing and sharing scene data
 Group    : Development/Tools
 License  : MIT
@@ -77,15 +77,15 @@ python3 components for the alembic package.
 
 
 %prep
-%setup -q -n alembic-1.3.1
-cd %{_builddir}/alembic-1.3.1
+%setup -q -n alembic-1.3.2
+cd %{_builddir}/alembic-1.3.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1573670609
+export SOURCE_DATE_EPOCH=1576539992
 # -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
@@ -102,7 +102,7 @@ python3 setup.py build
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/alembic
-cp %{_builddir}/alembic-1.3.1/LICENSE %{buildroot}/usr/share/package-licenses/alembic/d3dffefa259626c91331ec5302d469864fc172ed
+cp %{_builddir}/alembic-1.3.2/LICENSE %{buildroot}/usr/share/package-licenses/alembic/d3dffefa259626c91331ec5302d469864fc172ed
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
