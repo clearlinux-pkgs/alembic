@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x330239C1C4DAFEE1 (classic@zzzcomputing.com)
 #
 Name     : alembic
-Version  : 1.3.3
-Release  : 74
-URL      : https://files.pythonhosted.org/packages/9d/c9/d4aa3be3511dfd6d86f8f483ce0d9f120258be4aceadc17601843593e2ec/alembic-1.3.3.tar.gz
-Source0  : https://files.pythonhosted.org/packages/9d/c9/d4aa3be3511dfd6d86f8f483ce0d9f120258be4aceadc17601843593e2ec/alembic-1.3.3.tar.gz
-Source1  : https://files.pythonhosted.org/packages/9d/c9/d4aa3be3511dfd6d86f8f483ce0d9f120258be4aceadc17601843593e2ec/alembic-1.3.3.tar.gz.asc
+Version  : 1.4.0
+Release  : 75
+URL      : https://files.pythonhosted.org/packages/be/4e/9a6044bb78e8cb6d5846c07f8d3e976b7d5db845e5bd8c82c57f3ca91b0e/alembic-1.4.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/be/4e/9a6044bb78e8cb6d5846c07f8d3e976b7d5db845e5bd8c82c57f3ca91b0e/alembic-1.4.0.tar.gz
+Source1  : https://files.pythonhosted.org/packages/be/4e/9a6044bb78e8cb6d5846c07f8d3e976b7d5db845e5bd8c82c57f3ca91b0e/alembic-1.4.0.tar.gz.asc
 Summary  : A open framework for storing and sharing scene data
 Group    : Development/Tools
 License  : MIT
@@ -67,15 +67,15 @@ python3 components for the alembic package.
 
 
 %prep
-%setup -q -n alembic-1.3.3
-cd %{_builddir}/alembic-1.3.3
+%setup -q -n alembic-1.4.0
+cd %{_builddir}/alembic-1.4.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1579728260
+export SOURCE_DATE_EPOCH=1580944985
 # -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
