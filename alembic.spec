@@ -6,7 +6,7 @@
 #
 Name     : alembic
 Version  : 1.4.0
-Release  : 75
+Release  : 76
 URL      : https://files.pythonhosted.org/packages/be/4e/9a6044bb78e8cb6d5846c07f8d3e976b7d5db845e5bd8c82c57f3ca91b0e/alembic-1.4.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/be/4e/9a6044bb78e8cb6d5846c07f8d3e976b7d5db845e5bd8c82c57f3ca91b0e/alembic-1.4.0.tar.gz
 Source1  : https://files.pythonhosted.org/packages/be/4e/9a6044bb78e8cb6d5846c07f8d3e976b7d5db845e5bd8c82c57f3ca91b0e/alembic-1.4.0.tar.gz.asc
@@ -61,6 +61,7 @@ python components for the alembic package.
 Summary: python3 components for the alembic package.
 Group: Default
 Requires: python3-core
+Provides: pypi(alembic)
 
 %description python3
 python3 components for the alembic package.
@@ -75,7 +76,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1580944985
+export SOURCE_DATE_EPOCH=1582845381
 # -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
