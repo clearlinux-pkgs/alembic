@@ -5,15 +5,16 @@
 # Source0 file verified with key 0x330239C1C4DAFEE1 (classic@zzzcomputing.com)
 #
 Name     : alembic
-Version  : 1.4.1
-Release  : 77
-URL      : https://files.pythonhosted.org/packages/e0/e9/359dbb77c35c419df0aedeb1d53e71e7e3f438ff64a8fdb048c907404de3/alembic-1.4.1.tar.gz
-Source0  : https://files.pythonhosted.org/packages/e0/e9/359dbb77c35c419df0aedeb1d53e71e7e3f438ff64a8fdb048c907404de3/alembic-1.4.1.tar.gz
-Source1  : https://files.pythonhosted.org/packages/e0/e9/359dbb77c35c419df0aedeb1d53e71e7e3f438ff64a8fdb048c907404de3/alembic-1.4.1.tar.gz.asc
+Version  : 1.4.2
+Release  : 78
+URL      : https://files.pythonhosted.org/packages/60/1e/cabc75a189de0fbb2841d0975243e59bde8b7822bacbb95008ac6fe9ad47/alembic-1.4.2.tar.gz
+Source0  : https://files.pythonhosted.org/packages/60/1e/cabc75a189de0fbb2841d0975243e59bde8b7822bacbb95008ac6fe9ad47/alembic-1.4.2.tar.gz
+Source1  : https://files.pythonhosted.org/packages/60/1e/cabc75a189de0fbb2841d0975243e59bde8b7822bacbb95008ac6fe9ad47/alembic-1.4.2.tar.gz.asc
 Summary  : A open framework for storing and sharing scene data
 Group    : Development/Tools
 License  : MIT
 Requires: alembic-bin = %{version}-%{release}
+Requires: alembic-license = %{version}-%{release}
 Requires: alembic-python = %{version}-%{release}
 Requires: alembic-python3 = %{version}-%{release}
 Requires: Mako
@@ -43,9 +44,18 @@ Configuration that reads from a Pylons project environment.
 %package bin
 Summary: bin components for the alembic package.
 Group: Binaries
+Requires: alembic-license = %{version}-%{release}
 
 %description bin
 bin components for the alembic package.
+
+
+%package license
+Summary: license components for the alembic package.
+Group: Default
+
+%description license
+license components for the alembic package.
 
 
 %package python
@@ -62,21 +72,25 @@ Summary: python3 components for the alembic package.
 Group: Default
 Requires: python3-core
 Provides: pypi(alembic)
+Requires: pypi(mako)
+Requires: pypi(python_dateutil)
+Requires: pypi(python_editor)
+Requires: pypi(sqlalchemy)
 
 %description python3
 python3 components for the alembic package.
 
 
 %prep
-%setup -q -n alembic-1.4.1
-cd %{_builddir}/alembic-1.4.1
+%setup -q -n alembic-1.4.2
+cd %{_builddir}/alembic-1.4.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1583158031
+export SOURCE_DATE_EPOCH=1584713316
 # -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
@@ -92,6 +106,8 @@ python3 setup.py build
 %install
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/alembic
+cp %{_builddir}/alembic-1.4.2/LICENSE %{buildroot}/usr/share/package-licenses/alembic/c62dec169dab425e8dfb27b79208f00c4a85f125
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -103,6 +119,10 @@ echo ----[ mark ]----
 %files bin
 %defattr(-,root,root,-)
 /usr/bin/alembic
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/alembic/c62dec169dab425e8dfb27b79208f00c4a85f125
 
 %files python
 %defattr(-,root,root,-)

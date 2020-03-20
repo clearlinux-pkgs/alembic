@@ -3,6 +3,7 @@ barbican
 glance
 ironic
 neutron
+oslo.db
 sahara
 subunit2sql
 taskflow
