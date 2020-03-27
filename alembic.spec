@@ -6,7 +6,7 @@
 #
 Name     : alembic
 Version  : 1.4.2
-Release  : 78
+Release  : 79
 URL      : https://files.pythonhosted.org/packages/60/1e/cabc75a189de0fbb2841d0975243e59bde8b7822bacbb95008ac6fe9ad47/alembic-1.4.2.tar.gz
 Source0  : https://files.pythonhosted.org/packages/60/1e/cabc75a189de0fbb2841d0975243e59bde8b7822bacbb95008ac6fe9ad47/alembic-1.4.2.tar.gz
 Source1  : https://files.pythonhosted.org/packages/60/1e/cabc75a189de0fbb2841d0975243e59bde8b7822bacbb95008ac6fe9ad47/alembic-1.4.2.tar.gz.asc
@@ -27,16 +27,13 @@ BuildRequires : MarkupSafe
 BuildRequires : SQLAlchemy
 BuildRequires : buildreq-distutils3
 BuildRequires : funcsigs
-BuildRequires : pluggy
-BuildRequires : py-python
-BuildRequires : pytest
 BuildRequires : pytest-cov
+BuildRequires : pytest-python
 BuildRequires : python-dateutil
 BuildRequires : python-editor
 BuildRequires : python-mock
 BuildRequires : six
 BuildRequires : tox
-BuildRequires : virtualenv
 
 %description
 Configuration that reads from a Pylons project environment.
@@ -72,10 +69,10 @@ Summary: python3 components for the alembic package.
 Group: Default
 Requires: python3-core
 Provides: pypi(alembic)
-Requires: pypi(mako)
 Requires: pypi(python_dateutil)
-Requires: pypi(python_editor)
 Requires: pypi(sqlalchemy)
+Requires: pypi(mako)
+Requires: pypi(python_editor)
 
 %description python3
 python3 components for the alembic package.
@@ -90,7 +87,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1584713316
+export SOURCE_DATE_EPOCH=1585319935
 # -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
@@ -103,6 +100,11 @@ export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
+%check
+export http_proxy=http://127.0.0.1:9/
+export https_proxy=http://127.0.0.1:9/
+export no_proxy=localhost,127.0.0.1,0.0.0.0
+tox || :
 %install
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}

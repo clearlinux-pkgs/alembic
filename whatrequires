@@ -1,9 +1,6 @@
 # This file contains recursive sources that require this package
-barbican
-glance
 ironic
 neutron
 oslo.db
-sahara
 subunit2sql
 taskflow
