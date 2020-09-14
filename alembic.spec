@@ -5,12 +5,12 @@
 # Source0 file verified with key 0x330239C1C4DAFEE1 (classic@zzzcomputing.com)
 #
 Name     : alembic
-Version  : 1.4.2
-Release  : 80
-URL      : https://files.pythonhosted.org/packages/60/1e/cabc75a189de0fbb2841d0975243e59bde8b7822bacbb95008ac6fe9ad47/alembic-1.4.2.tar.gz
-Source0  : https://files.pythonhosted.org/packages/60/1e/cabc75a189de0fbb2841d0975243e59bde8b7822bacbb95008ac6fe9ad47/alembic-1.4.2.tar.gz
-Source1  : https://files.pythonhosted.org/packages/60/1e/cabc75a189de0fbb2841d0975243e59bde8b7822bacbb95008ac6fe9ad47/alembic-1.4.2.tar.gz.asc
-Summary  : A open framework for storing and sharing scene data
+Version  : 1.4.3
+Release  : 81
+URL      : https://files.pythonhosted.org/packages/cd/f5/705578ee067b92bcfbda4ca1122bdf8c7387dc2c691f1a9d39f18d78f84c/alembic-1.4.3.tar.gz
+Source0  : https://files.pythonhosted.org/packages/cd/f5/705578ee067b92bcfbda4ca1122bdf8c7387dc2c691f1a9d39f18d78f84c/alembic-1.4.3.tar.gz
+Source1  : https://files.pythonhosted.org/packages/cd/f5/705578ee067b92bcfbda4ca1122bdf8c7387dc2c691f1a9d39f18d78f84c/alembic-1.4.3.tar.gz.asc
+Summary  : A database migration tool for SQLAlchemy.
 Group    : Development/Tools
 License  : MIT
 Requires: alembic-bin = %{version}-%{release}
@@ -27,13 +27,16 @@ BuildRequires : MarkupSafe
 BuildRequires : SQLAlchemy
 BuildRequires : buildreq-distutils3
 BuildRequires : funcsigs
+BuildRequires : pluggy
+BuildRequires : py-python
+BuildRequires : pytest
 BuildRequires : pytest-cov
-BuildRequires : pytest-python
 BuildRequires : python-dateutil
 BuildRequires : python-editor
 BuildRequires : python-mock
 BuildRequires : six
 BuildRequires : tox
+BuildRequires : virtualenv
 
 %description
 Configuration that reads from a Pylons project environment.
@@ -69,47 +72,41 @@ Summary: python3 components for the alembic package.
 Group: Default
 Requires: python3-core
 Provides: pypi(alembic)
-Requires: pypi(python_dateutil)
-Requires: pypi(sqlalchemy)
 Requires: pypi(mako)
+Requires: pypi(python_dateutil)
 Requires: pypi(python_editor)
+Requires: pypi(sqlalchemy)
 
 %description python3
 python3 components for the alembic package.
 
 
 %prep
-%setup -q -n alembic-1.4.2
-cd %{_builddir}/alembic-1.4.2
+%setup -q -n alembic-1.4.3
+cd %{_builddir}/alembic-1.4.3
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1585319935
-# -Werror is for werrorists
+export SOURCE_DATE_EPOCH=1600104210
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
-%check
-export http_proxy=http://127.0.0.1:9/
-export https_proxy=http://127.0.0.1:9/
-export no_proxy=localhost,127.0.0.1,0.0.0.0
-tox || :
 %install
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/alembic
-cp %{_builddir}/alembic-1.4.2/LICENSE %{buildroot}/usr/share/package-licenses/alembic/c62dec169dab425e8dfb27b79208f00c4a85f125
+cp %{_builddir}/alembic-1.4.3/LICENSE %{buildroot}/usr/share/package-licenses/alembic/c62dec169dab425e8dfb27b79208f00c4a85f125
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
